@@ -17,7 +17,7 @@ import VoteButtons from './VoteButtons.vue'
 
 export default {
   props: ['comment'],
-  bootAsync: true,
+  // bootAsync: true,
   components: { VoteButtons }
 }
 </script>

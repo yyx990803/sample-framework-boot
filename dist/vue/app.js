@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Build: 2016-12-13T23:08:53.999Z
+ * Build: 2016-12-13T23:21:24.652Z
  */
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -2580,14 +2580,28 @@ var Comment = {
 render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;return _c('div',{staticClass:"post__comment"},[_c('h2',{staticClass:"post__comment-author"},[_vm._v(_vm._s(_vm.comment.username)+" wrote")]),_vm._v(" "),_c('p',{staticClass:"post__comment-text"},[_vm._v("\n    "+_vm._s(_vm.comment.text)+"\n  ")]),_vm._v(" "),_c('vote-buttons',{attrs:{"score":_vm.comment.score},on:{"upvote":function($event){_vm.comment.score++;},"downvote":function($event){_vm.comment.score--;}}})])},
 staticRenderFns: [],
   props: ['comment'],
-  bootAsync: true,
+  // bootAsync: true,
   components: { VoteButtons }
 };
 
+const hasIRC = typeof requestIdleCallback !== 'undefined';
+
+var Yield = {
+  render (h) {
+    if (this._isMounted || !hasIRC) {
+      return this.$slots.default[0]
+    } else {
+      requestIdleCallback(() => {
+        this.$forceUpdate();
+      });
+    }
+  }
+};
+
 var App = {
-render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;return _c('section',{staticClass:"post"},[_c('h1',{staticClass:"post__title"},[_vm._v("A post about priorities and scheduling")]),_vm._v(" "),_c('a',{staticClass:"post__link",attrs:{"href":"#"}},[_vm._v("http://example.com/post")]),_vm._v(" "),_vm._m(0),_vm._v(" "),_c('section',{staticClass:"post__comments"},[_c('h1',[_vm._v("Comments")]),_vm._v(" "),_vm._l((_vm.commentData),function(comment){return _c('comment',{attrs:{"comment":comment}})})],true)])},
+render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;return _c('section',{staticClass:"post"},[_c('h1',{staticClass:"post__title"},[_vm._v("A post about priorities and scheduling")]),_vm._v(" "),_c('a',{staticClass:"post__link",attrs:{"href":"#"}},[_vm._v("http://example.com/post")]),_vm._v(" "),_vm._m(0),_vm._v(" "),_c('section',{staticClass:"post__comments"},[_c('h1',[_vm._v("Comments")]),_vm._v(" "),_vm._l((_vm.commentData),function(comment){return _c('yield',[_c('comment',{attrs:{"comment":comment}})])})],true)])},
 staticRenderFns: [function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;return _c('div',{staticClass:"post__description"},[_c('p',[_vm._v("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed orci mauris, euismod quis imperdiet eu, lacinia in leo. Mauris in orci sit amet eros finibus molestie. Vivamus laoreet, nibh eget ultrices consequat, leo mauris suscipit libero, eget feugiat enim turpis ac neque. Nam venenatis dolor ac posuere rhoncus.")]),_vm._v(" "),_c('p',[_vm._v("In eget finibus sapien, sit amet tempus augue. Pellentesque eu interdum nulla, sit amet dictum turpis. Sed ut lorem quis purus aliquet egestas. Nulla id risus ex. Morbi et lacinia risus. Integer eget ornare arcu. Donec purus est, dignissim a ante a, lacinia placerat massa. Donec quis lacinia lorem.")])])}],
-  components: { Comment },
+  components: { Yield, Comment },
   data: () => ({ commentData })
 };
 
