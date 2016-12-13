@@ -17,8 +17,21 @@ const intro = `/*!
  * Build: ${(new Date()).toISOString()}
  */`;
 
+import vue from 'rollup-plugin-vue2'
+import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
+
 export default {
   entry: 'src/vue/app.js',
   dest: 'dist/vue/app.js',
+  plugins: [
+    vue(),
+    resolve({
+      jsnext: true,
+      main: true,
+      browser: true
+    }),
+    commonjs()
+  ],
   intro
 };

@@ -16,7 +16,8 @@
     "make-react": "mkdirp dist/react",
     "build-react": "npm run make-react && cp src/react/ssr.html dist/react && cp src/react/no-ssr.html dist/react && rollup -c src/react/rollup.config.js",
     "make-vue": "mkdirp dist/vue",
-    "build-vue": "npm run make-vue && cp -R src/vue dist && rollup -c src/vue/rollup.config.js",
+    "build-vue-ssr": "cd dist/vue && node ssr.js 2> /dev/null",
+    "build-vue": "npm run make-vue && cp -R src/vue dist && rollup -c src/vue/rollup.config.js && npm run build-vue-ssr",
     "make-custom-elements": "mkdirp dist/custom-elements",
     "build-custom-elements": "npm run make-custom-elements && cp -R src/custom-elements dist",
     "make-ember2": "mkdirp dist/ember2",
@@ -36,6 +37,9 @@
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-commonjs": "^5.0.5",
     "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-replace": "^1.1.1"
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-vue2": "^0.6.1",
+    "vue": "^2.1.4",
+    "vue-server-renderer": "^2.1.4"
   }
 }
