@@ -6,7 +6,9 @@ const app = new Vue({
 })
 
 if (typeof window !== 'undefined') {
-  app.$mount('.post')
+  document.addEventListener('DOMContentLoaded', () => {
+    app.$mount('.post')
+  })
 } else {
   module.exports = app
 }

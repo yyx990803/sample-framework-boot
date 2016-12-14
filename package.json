@@ -16,7 +16,7 @@
     "make-react": "mkdirp dist/react",
     "build-react": "npm run make-react && cp src/react/ssr.html dist/react && cp src/react/no-ssr.html dist/react && rollup -c src/react/rollup.config.js",
     "make-vue": "mkdirp dist/vue",
-    "build-vue": "npm run make-vue && rollup -c src/vue/rollup.config.js && rollup -c src/vue/rollup.config.js --environment SSR && node src/vue/build.js",
+    "build-vue": "npm run make-vue && rollup -c src/vue/rollup.config.js && rollup -c src/vue/rollup.config.js --environment SSR && node src/vue/ssr-build.js",
     "make-custom-elements": "mkdirp dist/custom-elements",
     "build-custom-elements": "npm run make-custom-elements && cp -R src/custom-elements dist",
     "make-ember2": "mkdirp dist/ember2",
