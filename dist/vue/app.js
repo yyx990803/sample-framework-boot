@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Build: 2016-12-14T19:10:45.143Z
+ * Build: 2016-12-14T19:21:34.798Z
  */
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -2564,6 +2564,7 @@ var yieldMixin = {
     const render = this.$options.render;
     this.$options.render = function delayedRender (h) {
       if (!hasIRC || this.hasRendered) {
+        this.$options.render = render;
         return render.call(this, h)
       } else if (!this.pendingRender) {
         this.pendingRender = true;
@@ -2615,7 +2616,9 @@ const app = new vue_min$1({
 });
 
 if (typeof window !== 'undefined') {
-  app.$mount('.post');
+  document.addEventListener('DOMContentLoaded', () => {
+    app.$mount('.post');
+  });
 } else {
   module.exports = app;
 }
