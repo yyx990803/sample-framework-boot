@@ -13,11 +13,12 @@
 </template>
 
 <script>
+import yieldMixin from './yield-mixin'
 import VoteButtons from './VoteButtons.vue'
 
 export default {
   props: ['comment'],
-  // bootAsync: true,
+  mixins: __SSR__ ? null : [yieldMixin],
   components: { VoteButtons }
 }
 </script>

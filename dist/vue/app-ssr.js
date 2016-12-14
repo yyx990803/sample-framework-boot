@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Build: 2016-12-14T19:06:45.156Z
+ * Build: 2016-12-14T19:06:45.990Z
  */
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -2559,23 +2559,6 @@ var commentData = [
 
 const hasIRC = typeof requestIdleCallback !== 'undefined';
 
-var yieldMixin = {
-  beforeMount () {
-    const render = this.$options.render;
-    this.$options.render = function delayedRender (h) {
-      if (!hasIRC || this.hasRendered) {
-        return render.call(this, h)
-      } else if (!this.pendingRender) {
-        this.pendingRender = true;
-        requestIdleCallback(() => {
-          this.hasRendered = true;
-          this.$forceUpdate();
-        });
-      }
-    };
-  }
-};
-
 var VoteButtons = {
 render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;return _c('div',{staticClass:"post__vote-buttons"},[_c('button',{staticClass:"post__vote-down",on:{"click":function($event){_vm.$emit('downvote');}}},[_vm._v("-")]),_vm._v(" "),_c('span',{staticClass:"post__vote-score"},[_vm._v(_vm._s(_vm._f("format")(_vm.score)))]),_vm._v(" "),_c('button',{staticClass:"post__vote-up",on:{"click":function($event){_vm.$emit('upvote');}}},[_vm._v("+")])])},
 staticRenderFns: [],
@@ -2599,7 +2582,7 @@ var Comment = {
 render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;return _c('div',{staticClass:"post__comment"},[_c('h2',{staticClass:"post__comment-author"},[_vm._v(_vm._s(_vm.comment.username)+" wrote")]),_vm._v(" "),_c('p',{staticClass:"post__comment-text"},[_vm._v("\n    "+_vm._s(_vm.comment.text)+"\n  ")]),_vm._v(" "),_c('vote-buttons',{attrs:{"score":_vm.comment.score},on:{"upvote":function($event){_vm.comment.score++;},"downvote":function($event){_vm.comment.score--;}}})],1)},
 staticRenderFns: [],
   props: ['comment'],
-  mixins: [yieldMixin],
+  mixins: null,
   components: { VoteButtons }
 };
 

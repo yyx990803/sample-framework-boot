@@ -8,9 +8,7 @@
     </div>
     <section class="post__comments">
       <h1>Comments</h1>
-      <yield v-for="comment in commentData">
-        <comment :comment="comment"/>
-      </yield>
+      <comment v-for="comment in commentData" :comment="comment"/>
     </section>
   </section>
 </template>
@@ -18,10 +16,9 @@
 <script>
 import commentData from '../shared/comments.js';
 import Comment from './Comment.vue';
-import Yield from './Yield.js'
 
 export default {
-  components: { Yield, Comment },
+  components: { Comment },
   data: () => ({ commentData })
 }
 </script>

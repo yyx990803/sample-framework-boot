@@ -20,10 +20,11 @@ const intro = `/*!
 import vue from 'rollup-plugin-vue2'
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import replace from 'rollup-plugin-replace';
 
 export default {
   entry: 'src/vue/app.js',
-  dest: 'dist/vue/app.js',
+  dest: 'dist/vue/' + (process.env.SSR ? 'app-ssr.js' : 'app.js'),
   plugins: [
     vue(),
     resolve({
@@ -31,7 +32,10 @@ export default {
       main: true,
       browser: true
     }),
-    commonjs()
+    commonjs(),
+    replace({
+      __SSR__: !!process.env.SSR
+    })
   ],
   intro
 };
