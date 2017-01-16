@@ -25,14 +25,6 @@ customElements.define('comments-app', class extends HTMLElement {
   }
 
   connectedCallback () {
-    if (typeof window.__comments === 'undefined') {
-      console.warn('Unable to find comment data. Bailing.');
-      return;
-    }
-
-    const comments = document.createElement('post-comments');
-    comments._data = window.__comments;
-
     this.innerHTML = `<section class="post">
       <h1 class="post__title">A post about priorities and scheduling</h1>
       <a href="#" class="post__link">http://example.com/post</a>
@@ -41,7 +33,16 @@ customElements.define('comments-app', class extends HTMLElement {
         <p>In eget finibus sapien, sit amet tempus augue. Pellentesque eu interdum nulla, sit amet dictum turpis. Sed ut lorem quis purus aliquet egestas. Nulla id risus ex. Morbi et lacinia risus. Integer eget ornare arcu. Donec purus est, dignissim a ante a, lacinia placerat massa. Donec quis lacinia lorem.</p>
       </div>
     </section>`;
+  }
 
+  renderComments () {
+    if (typeof window.__comments === 'undefined') {
+      console.warn('Unable to find comment data. Bailing.');
+      return;
+    }
+
+    const comments = document.createElement('post-comments');
+    comments._data = window.__comments;
     this.querySelector('.post').appendChild(comments);
   }
 })
