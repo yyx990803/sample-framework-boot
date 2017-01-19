@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Build: 2017-01-16T15:04:04.538Z
+ * Build: 2017-01-19T20:26:18.294Z
  */
 var hasOwnProperty=Object.prototype.hasOwnProperty;var propIsEnumerable=Object.prototype.propertyIsEnumerable;function toObject(val){if(val===null||val===undefined){throw new TypeError('Object.assign cannot be called with null or undefined');}return Object(val);}function shouldUseNative(){try{if(!Object.assign){return false;}// Detect buggy property enumeration order in older V8 versions.
 // https://bugs.chromium.org/p/v8/issues/detail?id=4118
@@ -44,10 +44,10 @@ throw error;}var reactProdInvariant_1=reactProdInvariant;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- */function invariant$1(condition,format,a,b,c,d,e,f){if(!condition){var error;if(format===undefined){error=new Error('Minified exception occurred; use the non-minified dev environment '+'for the full error message and additional helpful warnings.');}else{var args=[a,b,c,d,e,f];var argIndex=0;error=new Error(format.replace(/%s/g,function(){return args[argIndex++];}));error.name='Invariant Violation';}error.framesToPop=1;// we don't care about invariant's own frame
+ */var validateFormat=function validateFormat(format){};function invariant$1(condition,format,a,b,c,d,e,f){validateFormat(format);if(!condition){var error;if(format===undefined){error=new Error('Minified exception occurred; use the non-minified dev environment '+'for the full error message and additional helpful warnings.');}else{var args=[a,b,c,d,e,f];var argIndex=0;error=new Error(format.replace(/%s/g,function(){return args[argIndex++];}));error.name='Invariant Violation';}error.framesToPop=1;// we don't care about invariant's own frame
 throw error;}}var invariant_1=invariant$1;
 
-var _prodInvariant=reactProdInvariant_1;var oneArgumentPooler=function(copyFieldsFrom){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,copyFieldsFrom);return instance;}else{return new Klass(copyFieldsFrom);}};var twoArgumentPooler$1=function(a1,a2){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2);return instance;}else{return new Klass(a1,a2);}};var threeArgumentPooler=function(a1,a2,a3){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2,a3);return instance;}else{return new Klass(a1,a2,a3);}};var fourArgumentPooler$1=function(a1,a2,a3,a4){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2,a3,a4);return instance;}else{return new Klass(a1,a2,a3,a4);}};var fiveArgumentPooler=function(a1,a2,a3,a4,a5){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2,a3,a4,a5);return instance;}else{return new Klass(a1,a2,a3,a4,a5);}};var standardReleaser=function(instance){var Klass=this;!(instance instanceof Klass)?_prodInvariant('25'):void 0;instance.destructor();if(Klass.instancePool.length<Klass.poolSize){Klass.instancePool.push(instance);}};var DEFAULT_POOL_SIZE=10;var DEFAULT_POOLER=oneArgumentPooler;/**
+var _prodInvariant=reactProdInvariant_1;var oneArgumentPooler=function(copyFieldsFrom){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,copyFieldsFrom);return instance;}else{return new Klass(copyFieldsFrom);}};var twoArgumentPooler$1=function(a1,a2){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2);return instance;}else{return new Klass(a1,a2);}};var threeArgumentPooler=function(a1,a2,a3){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2,a3);return instance;}else{return new Klass(a1,a2,a3);}};var fourArgumentPooler$1=function(a1,a2,a3,a4){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2,a3,a4);return instance;}else{return new Klass(a1,a2,a3,a4);}};var standardReleaser=function(instance){var Klass=this;!(instance instanceof Klass)?_prodInvariant('25'):void 0;instance.destructor();if(Klass.instancePool.length<Klass.poolSize){Klass.instancePool.push(instance);}};var DEFAULT_POOL_SIZE=10;var DEFAULT_POOLER=oneArgumentPooler;/**
  * Augments `CopyConstructor` to be a poolable class, augmenting only the class
  * itself (statically) not adding any prototypical fields. Any CopyConstructor
  * you give this may have a `poolSize` property, and will look for a
@@ -57,7 +57,7 @@ var _prodInvariant=reactProdInvariant_1;var oneArgumentPooler=function(copyField
  * @param {Function} pooler Customizable pooler.
  */var addPoolingTo=function(CopyConstructor,pooler){// Casting as any so that flow ignores the actual implementation and trusts
 // it to match the type we declared
-var NewKlass=CopyConstructor;NewKlass.instancePool=[];NewKlass.getPooled=pooler||DEFAULT_POOLER;if(!NewKlass.poolSize){NewKlass.poolSize=DEFAULT_POOL_SIZE;}NewKlass.release=standardReleaser;return NewKlass;};var PooledClass$1={addPoolingTo:addPoolingTo,oneArgumentPooler:oneArgumentPooler,twoArgumentPooler:twoArgumentPooler$1,threeArgumentPooler:threeArgumentPooler,fourArgumentPooler:fourArgumentPooler$1,fiveArgumentPooler:fiveArgumentPooler};var PooledClass_1=PooledClass$1;
+var NewKlass=CopyConstructor;NewKlass.instancePool=[];NewKlass.getPooled=pooler||DEFAULT_POOLER;if(!NewKlass.poolSize){NewKlass.poolSize=DEFAULT_POOL_SIZE;}NewKlass.release=standardReleaser;return NewKlass;};var PooledClass$1={addPoolingTo:addPoolingTo,oneArgumentPooler:oneArgumentPooler,twoArgumentPooler:twoArgumentPooler$1,threeArgumentPooler:threeArgumentPooler,fourArgumentPooler:fourArgumentPooler$1};var PooledClass_1=PooledClass$1;
 
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -776,7 +776,7 @@ if(iteratorFn){if(iteratorFn!==node.entries){var iterator=iteratorFn.call(node);
  * @param {ReactElement} element
  */function validatePropTypes(element){var componentClass=element.type;if(typeof componentClass!=='function'){return;}var name=componentClass.displayName||componentClass.name;if(componentClass.propTypes){checkReactTypeSpec(componentClass.propTypes,element.props,'prop',name,element,null);}if(typeof componentClass.getDefaultProps==='function'){void 0;}}var ReactElementValidator={createElement:function(type,props,children){var validType=typeof type==='string'||typeof type==='function';// We warn in this case but don't throw. We expect the element creation to
 // succeed and there will likely be errors in render.
-if(!validType){void 0;}var element=ReactElement$5.createElement.apply(this,arguments);// The result can be nullish if a mock or a custom function is used.
+if(!validType){if(typeof type!=='function'&&typeof type!=='string'){var info='';if(type===undefined||typeof type==='object'&&type!==null&&Object.keys(type).length===0){info+=' You likely forgot to export your component from the file '+'it\'s defined in.';}info+=getDeclarationErrorAddendum();void 0;}}var element=ReactElement$5.createElement.apply(this,arguments);// The result can be nullish if a mock or a custom function is used.
 // TODO: Drop this when these are no longer allowed as the type argument.
 if(element==null){return element;}// Skip key warning if the type isn't valid since our key validation logic
 // doesn't expect a non-string/function type and can throw confusing errors.
@@ -831,7 +831,7 @@ function getClassName(propValue){if(!propValue.constructor||!propValue.construct
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- */var ReactVersion$1='15.4.1';
+ */var ReactVersion$1='15.4.2';
 
 var _prodInvariant$6=reactProdInvariant_1;var ReactElement$7=ReactElement_1;function onlyChild$1(children){!ReactElement$7.isValidElement(children)?_prodInvariant$6('143'):void 0;return children;}var onlyChild_1=onlyChild$1;
 
@@ -952,6 +952,8 @@ var _prodInvariant$8=reactProdInvariant_1$2;function checkMask(value,bitmask){re
  */var ReactDOMComponentFlags$1={hasCachedChildNodes:1<<0};var ReactDOMComponentFlags_1=ReactDOMComponentFlags$1;
 
 var _prodInvariant$7=reactProdInvariant_1$2;var DOMProperty=DOMProperty_1;var ReactDOMComponentFlags=ReactDOMComponentFlags_1;var ATTR_NAME=DOMProperty.ID_ATTRIBUTE_NAME;var Flags=ReactDOMComponentFlags;var internalInstanceKey='__reactInternalInstance$'+Math.random().toString(36).slice(2);/**
+ * Check if a given node should be cached.
+ */function shouldPrecacheNode(node,nodeID){return node.nodeType===1&&node.getAttribute(ATTR_NAME)===String(nodeID)||node.nodeType===8&&node.nodeValue===' react-text: '+nodeID+' '||node.nodeType===8&&node.nodeValue===' react-empty: '+nodeID+' ';}/**
  * Drill down (through composites and empty components) until we get a host or
  * host text component.
  *
@@ -975,7 +977,7 @@ var _prodInvariant$7=reactProdInvariant_1$2;var DOMProperty=DOMProperty_1;var Re
  * time the container's child nodes are always cached (until it unmounts).
  */function precacheChildNodes(inst,node){if(inst._flags&Flags.hasCachedChildNodes){return;}var children=inst._renderedChildren;var childNode=node.firstChild;outer:for(var name in children){if(!children.hasOwnProperty(name)){continue;}var childInst=children[name];var childID=getRenderedHostOrTextFromComponent(childInst)._domID;if(childID===0){// We're currently unmounting this child in ReactMultiChild; skip it.
 continue;}// We assume the child nodes are in the same order as the child instances.
-for(;childNode!==null;childNode=childNode.nextSibling){if(childNode.nodeType===1&&childNode.getAttribute(ATTR_NAME)===String(childID)||childNode.nodeType===8&&childNode.nodeValue===' react-text: '+childID+' '||childNode.nodeType===8&&childNode.nodeValue===' react-empty: '+childID+' '){precacheNode(childInst,childNode);continue outer;}}// We reached the end of the DOM children without finding an ID match.
+for(;childNode!==null;childNode=childNode.nextSibling){if(shouldPrecacheNode(childNode,childID)){precacheNode(childInst,childNode);continue outer;}}// We reached the end of the DOM children without finding an ID match.
 _prodInvariant$7('32',childID);}inst._flags|=Flags.hasCachedChildNodes;}/**
  * Given a DOM node, return the closest ReactDOMComponent or
  * ReactDOMTextComponent instance ancestor.
@@ -1291,7 +1293,7 @@ var EventPluginHub=EventPluginHub_1;var EventPluginUtils=EventPluginUtils_1;var 
  */var ExecutionEnvironment$1={canUseDOM:canUseDOM,canUseWorkers:typeof Worker!=='undefined',canUseEventListeners:canUseDOM&&!!(window.addEventListener||window.attachEvent),canUseViewport:canUseDOM&&!!window.screen,isInWorker:!canUseDOM// For now, this is true - might change in the future.
 };var ExecutionEnvironment_1=ExecutionEnvironment$1;
 
-var _prodInvariant$13=reactProdInvariant_1$2;var oneArgumentPooler$1=function(copyFieldsFrom){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,copyFieldsFrom);return instance;}else{return new Klass(copyFieldsFrom);}};var twoArgumentPooler$2=function(a1,a2){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2);return instance;}else{return new Klass(a1,a2);}};var threeArgumentPooler$1=function(a1,a2,a3){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2,a3);return instance;}else{return new Klass(a1,a2,a3);}};var fourArgumentPooler$2=function(a1,a2,a3,a4){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2,a3,a4);return instance;}else{return new Klass(a1,a2,a3,a4);}};var fiveArgumentPooler$1=function(a1,a2,a3,a4,a5){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2,a3,a4,a5);return instance;}else{return new Klass(a1,a2,a3,a4,a5);}};var standardReleaser$1=function(instance){var Klass=this;!(instance instanceof Klass)?_prodInvariant$13('25'):void 0;instance.destructor();if(Klass.instancePool.length<Klass.poolSize){Klass.instancePool.push(instance);}};var DEFAULT_POOL_SIZE$1=10;var DEFAULT_POOLER$1=oneArgumentPooler$1;/**
+var _prodInvariant$13=reactProdInvariant_1$2;var oneArgumentPooler$1=function(copyFieldsFrom){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,copyFieldsFrom);return instance;}else{return new Klass(copyFieldsFrom);}};var twoArgumentPooler$2=function(a1,a2){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2);return instance;}else{return new Klass(a1,a2);}};var threeArgumentPooler$1=function(a1,a2,a3){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2,a3);return instance;}else{return new Klass(a1,a2,a3);}};var fourArgumentPooler$2=function(a1,a2,a3,a4){var Klass=this;if(Klass.instancePool.length){var instance=Klass.instancePool.pop();Klass.call(instance,a1,a2,a3,a4);return instance;}else{return new Klass(a1,a2,a3,a4);}};var standardReleaser$1=function(instance){var Klass=this;!(instance instanceof Klass)?_prodInvariant$13('25'):void 0;instance.destructor();if(Klass.instancePool.length<Klass.poolSize){Klass.instancePool.push(instance);}};var DEFAULT_POOL_SIZE$1=10;var DEFAULT_POOLER$1=oneArgumentPooler$1;/**
  * Augments `CopyConstructor` to be a poolable class, augmenting only the class
  * itself (statically) not adding any prototypical fields. Any CopyConstructor
  * you give this may have a `poolSize` property, and will look for a
@@ -1301,7 +1303,7 @@ var _prodInvariant$13=reactProdInvariant_1$2;var oneArgumentPooler$1=function(co
  * @param {Function} pooler Customizable pooler.
  */var addPoolingTo$1=function(CopyConstructor,pooler){// Casting as any so that flow ignores the actual implementation and trusts
 // it to match the type we declared
-var NewKlass=CopyConstructor;NewKlass.instancePool=[];NewKlass.getPooled=pooler||DEFAULT_POOLER$1;if(!NewKlass.poolSize){NewKlass.poolSize=DEFAULT_POOL_SIZE$1;}NewKlass.release=standardReleaser$1;return NewKlass;};var PooledClass$3={addPoolingTo:addPoolingTo$1,oneArgumentPooler:oneArgumentPooler$1,twoArgumentPooler:twoArgumentPooler$2,threeArgumentPooler:threeArgumentPooler$1,fourArgumentPooler:fourArgumentPooler$2,fiveArgumentPooler:fiveArgumentPooler$1};var PooledClass_1$2=PooledClass$3;
+var NewKlass=CopyConstructor;NewKlass.instancePool=[];NewKlass.getPooled=pooler||DEFAULT_POOLER$1;if(!NewKlass.poolSize){NewKlass.poolSize=DEFAULT_POOL_SIZE$1;}NewKlass.release=standardReleaser$1;return NewKlass;};var PooledClass$3={addPoolingTo:addPoolingTo$1,oneArgumentPooler:oneArgumentPooler$1,twoArgumentPooler:twoArgumentPooler$2,threeArgumentPooler:threeArgumentPooler$1,fourArgumentPooler:fourArgumentPooler$2};var PooledClass_1$2=PooledClass$3;
 
 var ExecutionEnvironment$2=ExecutionEnvironment_1;var contentKey=null;/**
  * Gets the key used to access text content on a DOM node.
@@ -2755,7 +2757,15 @@ step:undefined,// Make sure we set .min & .max before .value (to ensure proper o
 min:undefined,max:undefined},props,{defaultChecked:undefined,defaultValue:undefined,value:value!=null?value:inst._wrapperState.initialValue,checked:checked!=null?checked:inst._wrapperState.initialChecked,onChange:inst._wrapperState.onChange});return hostProps;},mountWrapper:function(inst,props){var defaultValue=props.defaultValue;inst._wrapperState={initialChecked:props.checked!=null?props.checked:props.defaultChecked,initialValue:props.value!=null?props.value:defaultValue,listeners:null,onChange:_handleChange.bind(inst)};},updateWrapper:function(inst){var props=inst._currentElement.props;var checked=props.checked;if(checked!=null){DOMPropertyOperations$2.setValueForProperty(ReactDOMComponentTree$10.getNodeFromInstance(inst),'checked',checked||false);}var node=ReactDOMComponentTree$10.getNodeFromInstance(inst);var value=LinkedValueUtils.getValue(props);if(value!=null){// Cast `value` to a string to ensure the value is set correctly. While
 // browsers typically do this as necessary, jsdom doesn't.
 var newValue=''+value;// To avoid side effects (such as losing text selection), only set value if changed
-if(newValue!==node.value){node.value=newValue;}}else{if(props.value==null&&props.defaultValue!=null){node.defaultValue=''+props.defaultValue;}if(props.checked==null&&props.defaultChecked!=null){node.defaultChecked=!!props.defaultChecked;}}},postMountWrapper:function(inst){var props=inst._currentElement.props;// This is in postMount because we need access to the DOM node, which is not
+if(newValue!==node.value){node.value=newValue;}}else{if(props.value==null&&props.defaultValue!=null){// In Chrome, assigning defaultValue to certain input types triggers input validation.
+// For number inputs, the display value loses trailing decimal points. For email inputs,
+// Chrome raises "The specified value <x> is not a valid email address".
+//
+// Here we check to see if the defaultValue has actually changed, avoiding these problems
+// when the user is inputting text
+//
+// https://github.com/facebook/react/issues/7253
+if(node.defaultValue!==''+props.defaultValue){node.defaultValue=''+props.defaultValue;}}if(props.checked==null&&props.defaultChecked!=null){node.defaultChecked=!!props.defaultChecked;}}},postMountWrapper:function(inst){var props=inst._currentElement.props;// This is in postMount because we need access to the DOM node, which is not
 // available until after the component has mounted.
 var node=ReactDOMComponentTree$10.getNodeFromInstance(inst);// Detach value from defaultValue. We won't do anything if we're working on
 // submit or reset inputs as those values & defaultValues are linked. They
@@ -2851,9 +2861,11 @@ var children=props.children;if(children!=null){!(defaultValue==null)?_prodInvari
 var newValue=''+value;// To avoid side effects (such as losing text selection), only set value if changed
 if(newValue!==node.value){node.value=newValue;}if(props.defaultValue==null){node.defaultValue=newValue;}}if(props.defaultValue!=null){node.defaultValue=props.defaultValue;}},postMountWrapper:function(inst){// This is in postMount because we need access to the DOM node, which is not
 // available until after the component has mounted.
-var node=ReactDOMComponentTree$13.getNodeFromInstance(inst);// Warning: node.value may be the empty string at this point (IE11) if placeholder is set.
-node.value=node.textContent;// Detach value from defaultValue
-}};function _handleChange$2(event){var props=this._currentElement.props;var returnValue=LinkedValueUtils$3.executeOnChange(props,event);ReactUpdates$5.asap(forceUpdateIfMounted$1,this);return returnValue;}var ReactDOMTextarea_1=ReactDOMTextarea$1;
+var node=ReactDOMComponentTree$13.getNodeFromInstance(inst);var textContent=node.textContent;// Only set node.value if textContent is equal to the expected
+// initial value. In IE10/IE11 there is a bug where the placeholder attribute
+// will populate textContent as well.
+// https://developer.microsoft.com/microsoft-edge/platform/issues/101525/
+if(textContent===inst._wrapperState.initialValue){node.value=textContent;}}};function _handleChange$2(event){var props=this._currentElement.props;var returnValue=LinkedValueUtils$3.executeOnChange(props,event);ReactUpdates$5.asap(forceUpdateIfMounted$1,this);return returnValue;}var ReactDOMTextarea_1=ReactDOMTextarea$1;
 
 var _prodInvariant$24=reactProdInvariant_1$2;var injected=false;var ReactComponentEnvironment$1={/**
    * Optionally injectable hook for swapping out mount images in the middle of
@@ -3116,14 +3128,11 @@ _instantiateReactComponent:null};var ReactCompositeComponent_1=ReactCompositeCom
  *
  */var emptyComponentFactory;var ReactEmptyComponentInjection={injectEmptyComponentFactory:function(factory){emptyComponentFactory=factory;}};var ReactEmptyComponent$1={create:function(instantiate){return emptyComponentFactory(instantiate);}};ReactEmptyComponent$1.injection=ReactEmptyComponentInjection;var ReactEmptyComponent_1=ReactEmptyComponent$1;
 
-var _prodInvariant$29=reactProdInvariant_1$2; var _assign$15=index;var genericComponentClass=null;// This registry keeps track of wrapper classes around host tags.
-var tagToComponentClass={};var textComponentClass=null;var ReactHostComponentInjection={// This accepts a class that receives the tag string. This is a catch all
+var _prodInvariant$29=reactProdInvariant_1$2;var genericComponentClass=null;var textComponentClass=null;var ReactHostComponentInjection={// This accepts a class that receives the tag string. This is a catch all
 // that can render any kind of tag.
 injectGenericComponentClass:function(componentClass){genericComponentClass=componentClass;},// This accepts a text component class that takes the text string to be
 // rendered as props.
-injectTextComponentClass:function(componentClass){textComponentClass=componentClass;},// This accepts a keyed object with classes as values. Each key represents a
-// tag. That particular tag will use this class instead of the generic one.
-injectComponentClasses:function(componentClasses){_assign$15(tagToComponentClass,componentClasses);}};/**
+injectTextComponentClass:function(componentClass){textComponentClass=componentClass;}};/**
  * Get a host internal component class for a specific tag.
  *
  * @param {ReactElement} element The element to create.
@@ -3160,7 +3169,7 @@ var _prodInvariant$25=reactProdInvariant_1$2; var _assign$13=index;var ReactComp
  * @param {boolean} shouldHaveDebugID
  * @return {object} A new instance of the element's constructor.
  * @protected
- */function instantiateReactComponent$1(node,shouldHaveDebugID){var instance;if(node===null||node===false){instance=ReactEmptyComponent.create(instantiateReactComponent$1);}else if(typeof node==='object'){var element=node;!(element&&(typeof element.type==='function'||typeof element.type==='string'))?_prodInvariant$25('130',element.type==null?element.type:typeof element.type,getDeclarationErrorAddendum$4(element._owner)):void 0;// Special case string values
+ */function instantiateReactComponent$1(node,shouldHaveDebugID){var instance;if(node===null||node===false){instance=ReactEmptyComponent.create(instantiateReactComponent$1);}else if(typeof node==='object'){var element=node;var type=element.type;if(typeof type!=='function'&&typeof type!=='string'){var info='';info+=getDeclarationErrorAddendum$4(element._owner);_prodInvariant$25('130',type==null?type:typeof type,info);}// Special case string values
 if(typeof element.type==='string'){instance=ReactHostComponent.createInternalComponent(element);}else if(isInternalComponentType(element.type)){// This is temporarily available for custom components that are not string
 // representations. I.e. ART. Once those are updated to use the string
 // representation, we can drop this code path.
@@ -3559,7 +3568,7 @@ function _classCallCheck$1(instance,Constructor){if(!(instance instanceof Constr
    * @internal
    */ReactServerUpdateQueue.prototype.enqueueSetState=function enqueueSetState(publicInstance,partialState){if(this.transaction.isInTransaction()){ReactUpdateQueue.enqueueSetState(publicInstance,partialState);}else{warnNoop$1(publicInstance,'setState');}};return ReactServerUpdateQueue;}();var ReactServerUpdateQueue_1=ReactServerUpdateQueue$1;
 
-var _assign$16=index;var PooledClass$7=PooledClass_1$2;var Transaction$3=Transaction$1;var ReactServerUpdateQueue=ReactServerUpdateQueue_1;/**
+var _assign$15=index;var PooledClass$7=PooledClass_1$2;var Transaction$3=Transaction$1;var ReactServerUpdateQueue=ReactServerUpdateQueue_1;/**
  * Executed within the scope of the `Transaction` instance. Consider these as
  * being member methods, but with an implied ordering while being isolated from
  * each other.
@@ -3578,7 +3587,7 @@ var _assign$16=index;var PooledClass$7=PooledClass_1$2;var Transaction$3=Transac
    */getUpdateQueue:function(){return this.updateQueue;},/**
    * `PooledClass` looks for this, and will invoke this before allowing this
    * instance to be reused.
-   */destructor:function(){},checkpoint:function(){},rollback:function(){}};_assign$16(ReactServerRenderingTransaction$1.prototype,Transaction$3,Mixin);PooledClass$7.addPoolingTo(ReactServerRenderingTransaction$1);var ReactServerRenderingTransaction_1=ReactServerRenderingTransaction$1;
+   */destructor:function(){},checkpoint:function(){},rollback:function(){}};_assign$15(ReactServerRenderingTransaction$1.prototype,Transaction$3,Mixin);PooledClass$7.addPoolingTo(ReactServerRenderingTransaction$1);var ReactServerRenderingTransaction_1=ReactServerRenderingTransaction$1;
 
 var _prodInvariant$19=reactProdInvariant_1$2; var _assign$7=index;var AutoFocusUtils=AutoFocusUtils_1;var CSSPropertyOperations=CSSPropertyOperations_1;var DOMLazyTree$3=DOMLazyTree_1;var DOMNamespaces$3=DOMNamespaces_1;var DOMProperty$3=DOMProperty_1;var DOMPropertyOperations=DOMPropertyOperations_1;var EventPluginHub$3=EventPluginHub_1;var EventPluginRegistry$2=EventPluginRegistry_1;var ReactBrowserEventEmitter=ReactBrowserEventEmitter_1;var ReactDOMComponentFlags$2=ReactDOMComponentFlags_1;var ReactDOMComponentTree$7=ReactDOMComponentTree_1;var ReactDOMInput=ReactDOMInput_1;var ReactDOMOption=ReactDOMOption_1;var ReactDOMSelect=ReactDOMSelect_1;var ReactDOMTextarea=ReactDOMTextarea_1;var ReactMultiChild=ReactMultiChild_1;var ReactServerRenderingTransaction=ReactServerRenderingTransaction_1;var escapeTextContentForBrowser$2=escapeTextContentForBrowser_1;var shallowEqual=shallowEqual_1;var Flags$1=ReactDOMComponentFlags$2;var deleteListener=EventPluginHub$3.deleteListener;var getNode=ReactDOMComponentTree$7.getNodeFromInstance;var listenTo=ReactBrowserEventEmitter.listenTo;var registrationNameModules=EventPluginRegistry$2.registrationNameModules;// For quickly matching children type, to test if can be treated as content.
 var CONTENT_TYPES={'string':true,'number':true};var STYLE='style';var HTML='__html';var RESERVED_PROPS$1={children:null,dangerouslySetInnerHTML:null,suppressContentEditableWarning:null};// Node type for document fragments (Node.DOCUMENT_FRAGMENT_NODE).
@@ -3660,8 +3669,12 @@ ret=escapeTextContentForBrowser$2(contentToUse);}else if(childrenToUse!=null){va
 // See: Parsing of "textarea" "listing" and "pre" elements
 //  from <http://www.w3.org/TR/html5/syntax.html#parsing-main-inbody>
 return'\n'+ret;}else{return ret;}},_createInitialChildren:function(transaction,props,context,lazyTree){// Intentional use of != to avoid catching zero/false.
-var innerHTML=props.dangerouslySetInnerHTML;if(innerHTML!=null){if(innerHTML.__html!=null){DOMLazyTree$3.queueHTML(lazyTree,innerHTML.__html);}}else{var contentToUse=CONTENT_TYPES[typeof props.children]?props.children:null;var childrenToUse=contentToUse!=null?null:props.children;if(contentToUse!=null){// TODO: Validate that text is allowed as a child of this node
-DOMLazyTree$3.queueText(lazyTree,contentToUse);}else if(childrenToUse!=null){var mountImages=this.mountChildren(childrenToUse,transaction,context);for(var i=0;i<mountImages.length;i++){DOMLazyTree$3.queueChild(lazyTree,mountImages[i]);}}}},/**
+var innerHTML=props.dangerouslySetInnerHTML;if(innerHTML!=null){if(innerHTML.__html!=null){DOMLazyTree$3.queueHTML(lazyTree,innerHTML.__html);}}else{var contentToUse=CONTENT_TYPES[typeof props.children]?props.children:null;var childrenToUse=contentToUse!=null?null:props.children;// TODO: Validate that text is allowed as a child of this node
+if(contentToUse!=null){// Avoid setting textContent when the text is empty. In IE11 setting
+// textContent on a text area will cause the placeholder to not
+// show within the textarea until it has been focused and blurred again.
+// https://github.com/facebook/react/issues/6731#issuecomment-254874553
+if(contentToUse!==''){DOMLazyTree$3.queueText(lazyTree,contentToUse);}}else if(childrenToUse!=null){var mountImages=this.mountChildren(childrenToUse,transaction,context);for(var i=0;i<mountImages.length;i++){DOMLazyTree$3.queueChild(lazyTree,mountImages[i]);}}}},/**
    * Receives a next element and updates the component.
    *
    * @internal
@@ -3729,9 +3742,9 @@ var lastHasContentOrHtml=lastContent!=null||lastHtml!=null;var nextHasContentOrH
          * management. So we just document it and throw in dangerous cases.
          */_prodInvariant$19('66',this._tag);break;}this.unmountChildren(safely);ReactDOMComponentTree$7.uncacheNode(this);EventPluginHub$3.deleteAllListeners(this);this._rootNodeID=0;this._domID=0;this._wrapperState=null;},getPublicInstance:function(){return getNode(this);}};_assign$7(ReactDOMComponent$1.prototype,ReactDOMComponent$1.Mixin,ReactMultiChild.Mixin);var ReactDOMComponent_1=ReactDOMComponent$1;
 
-var _assign$18=index;var DOMLazyTree$4=DOMLazyTree_1;var ReactDOMComponentTree$14=ReactDOMComponentTree_1;var ReactDOMEmptyComponent$1=function(instantiate){// ReactCompositeComponent uses this:
+var _assign$17=index;var DOMLazyTree$4=DOMLazyTree_1;var ReactDOMComponentTree$14=ReactDOMComponentTree_1;var ReactDOMEmptyComponent$1=function(instantiate){// ReactCompositeComponent uses this:
 this._currentElement=null;// ReactDOMComponentTree uses these:
-this._hostNode=null;this._hostParent=null;this._hostContainerInfo=null;this._domID=0;};_assign$18(ReactDOMEmptyComponent$1.prototype,{mountComponent:function(transaction,hostParent,hostContainerInfo,context){var domID=hostContainerInfo._idCounter++;this._domID=domID;this._hostParent=hostParent;this._hostContainerInfo=hostContainerInfo;var nodeValue=' react-empty: '+this._domID+' ';if(transaction.useCreateElement){var ownerDocument=hostContainerInfo._ownerDocument;var node=ownerDocument.createComment(nodeValue);ReactDOMComponentTree$14.precacheNode(this,node);return DOMLazyTree$4(node);}else{if(transaction.renderToStaticMarkup){// Normally we'd insert a comment node, but since this is a situation
+this._hostNode=null;this._hostParent=null;this._hostContainerInfo=null;this._domID=0;};_assign$17(ReactDOMEmptyComponent$1.prototype,{mountComponent:function(transaction,hostParent,hostContainerInfo,context){var domID=hostContainerInfo._idCounter++;this._domID=domID;this._hostParent=hostParent;this._hostContainerInfo=hostContainerInfo;var nodeValue=' react-empty: '+this._domID+' ';if(transaction.useCreateElement){var ownerDocument=hostContainerInfo._ownerDocument;var node=ownerDocument.createComment(nodeValue);ReactDOMComponentTree$14.precacheNode(this,node);return DOMLazyTree$4(node);}else{if(transaction.renderToStaticMarkup){// Normally we'd insert a comment node, but since this is a situation
 // where React won't take over (static pages), we can simply return
 // nothing.
 return'';}return'<!--'+nodeValue+'-->';}},receiveComponent:function(){},getHostNode:function(){return ReactDOMComponentTree$14.getNodeFromInstance(this);},unmountComponent:function(){ReactDOMComponentTree$14.uncacheNode(this);}});var ReactDOMEmptyComponent_1=ReactDOMEmptyComponent$1;
@@ -3753,10 +3766,10 @@ var depth=depthA;while(depth--){if(instA===instB){return instA;}instA=instA._hos
  * "entered" or "left" that element.
  */function traverseEnterLeave(from,to,fn,argFrom,argTo){var common=from&&to?getLowestCommonAncestor(from,to):null;var pathFrom=[];while(from&&from!==common){pathFrom.push(from);from=from._hostParent;}var pathTo=[];while(to&&to!==common){pathTo.push(to);to=to._hostParent;}var i;for(i=0;i<pathFrom.length;i++){fn(pathFrom[i],'bubbled',argFrom);}for(i=pathTo.length;i-->0;){fn(pathTo[i],'captured',argTo);}}var ReactDOMTreeTraversal$1={isAncestor:isAncestor,getLowestCommonAncestor:getLowestCommonAncestor,getParentInstance:getParentInstance,traverseTwoPhase:traverseTwoPhase,traverseEnterLeave:traverseEnterLeave};
 
-var _prodInvariant$33=reactProdInvariant_1$2; var _assign$19=index;var DOMChildrenOperations$3=DOMChildrenOperations_1;var DOMLazyTree$5=DOMLazyTree_1;var ReactDOMComponentTree$15=ReactDOMComponentTree_1;var escapeTextContentForBrowser$4=escapeTextContentForBrowser_1;var ReactDOMTextComponent$1=function(text){// TODO: This is really a ReactText (ReactNode), not a ReactElement
+var _prodInvariant$33=reactProdInvariant_1$2; var _assign$18=index;var DOMChildrenOperations$3=DOMChildrenOperations_1;var DOMLazyTree$5=DOMLazyTree_1;var ReactDOMComponentTree$15=ReactDOMComponentTree_1;var escapeTextContentForBrowser$4=escapeTextContentForBrowser_1;var ReactDOMTextComponent$1=function(text){// TODO: This is really a ReactText (ReactNode), not a ReactElement
 this._currentElement=text;this._stringText=''+text;// ReactDOMComponentTree uses these:
 this._hostNode=null;this._hostParent=null;// Properties
-this._domID=0;this._mountIndex=0;this._closingComment=null;this._commentNodes=null;};_assign$19(ReactDOMTextComponent$1.prototype,{/**
+this._domID=0;this._mountIndex=0;this._closingComment=null;this._commentNodes=null;};_assign$18(ReactDOMTextComponent$1.prototype,{/**
    * Creates the markup for this text node. This node is not intended to have
    * any features besides containing text content.
    *
@@ -3777,7 +3790,7 @@ return escapedText;}return'<!--'+openingValue+'-->'+escapedText+'<!--'+closingVa
 // other component types?
 this._stringText=nextStringText;var commentNodes=this.getHostNode();DOMChildrenOperations$3.replaceDelimitedText(commentNodes[0],commentNodes[1],nextStringText);}}},getHostNode:function(){var hostNode=this._commentNodes;if(hostNode){return hostNode;}if(!this._closingComment){var openingComment=ReactDOMComponentTree$15.getNodeFromInstance(this);var node=openingComment.nextSibling;while(true){!(node!=null)?_prodInvariant$33('67',this._domID):void 0;if(node.nodeType===8&&node.nodeValue===' /react-text '){this._closingComment=node;break;}node=node.nextSibling;}}hostNode=[this._hostNode,this._closingComment];this._commentNodes=hostNode;return hostNode;},unmountComponent:function(){this._closingComment=null;this._commentNodes=null;ReactDOMComponentTree$15.uncacheNode(this);}});var ReactDOMTextComponent_1=ReactDOMTextComponent$1;
 
-var _assign$20=index;var ReactUpdates$7=ReactUpdates_1;var Transaction$4=Transaction$1;var emptyFunction$9=emptyFunction_1;var RESET_BATCHED_UPDATES={initialize:emptyFunction$9,close:function(){ReactDefaultBatchingStrategy$1.isBatchingUpdates=false;}};var FLUSH_BATCHED_UPDATES={initialize:emptyFunction$9,close:ReactUpdates$7.flushBatchedUpdates.bind(ReactUpdates$7)};var TRANSACTION_WRAPPERS$2=[FLUSH_BATCHED_UPDATES,RESET_BATCHED_UPDATES];function ReactDefaultBatchingStrategyTransaction(){this.reinitializeTransaction();}_assign$20(ReactDefaultBatchingStrategyTransaction.prototype,Transaction$4,{getTransactionWrappers:function(){return TRANSACTION_WRAPPERS$2;}});var transaction=new ReactDefaultBatchingStrategyTransaction();var ReactDefaultBatchingStrategy$1={isBatchingUpdates:false,/**
+var _assign$19=index;var ReactUpdates$7=ReactUpdates_1;var Transaction$4=Transaction$1;var emptyFunction$9=emptyFunction_1;var RESET_BATCHED_UPDATES={initialize:emptyFunction$9,close:function(){ReactDefaultBatchingStrategy$1.isBatchingUpdates=false;}};var FLUSH_BATCHED_UPDATES={initialize:emptyFunction$9,close:ReactUpdates$7.flushBatchedUpdates.bind(ReactUpdates$7)};var TRANSACTION_WRAPPERS$2=[FLUSH_BATCHED_UPDATES,RESET_BATCHED_UPDATES];function ReactDefaultBatchingStrategyTransaction(){this.reinitializeTransaction();}_assign$19(ReactDefaultBatchingStrategyTransaction.prototype,Transaction$4,{getTransactionWrappers:function(){return TRANSACTION_WRAPPERS$2;}});var transaction=new ReactDefaultBatchingStrategyTransaction();var ReactDefaultBatchingStrategy$1={isBatchingUpdates:false,/**
    * Call the provided function in a context within which calls to `setState`
    * and friends are batched such that components aren't updated unnecessarily.
    */batchedUpdates:function(callback,a,b,c,d,e){var alreadyBatchingUpdates=ReactDefaultBatchingStrategy$1.isBatchingUpdates;ReactDefaultBatchingStrategy$1.isBatchingUpdates=true;// The code is written this way to avoid extra allocations
@@ -3813,7 +3826,7 @@ var emptyFunction$10=emptyFunction_1;/**
  * @typechecks
  */function getUnboundedScrollPosition$1(scrollable){if(scrollable===window){return{x:window.pageXOffset||document.documentElement.scrollLeft,y:window.pageYOffset||document.documentElement.scrollTop};}return{x:scrollable.scrollLeft,y:scrollable.scrollTop};}var getUnboundedScrollPosition_1=getUnboundedScrollPosition$1;
 
-var _assign$21=index;var EventListener=EventListener_1;var ExecutionEnvironment$14=ExecutionEnvironment_1;var PooledClass$8=PooledClass_1$2;var ReactDOMComponentTree$16=ReactDOMComponentTree_1;var ReactUpdates$8=ReactUpdates_1;var getEventTarget$3=getEventTarget_1;var getUnboundedScrollPosition=getUnboundedScrollPosition_1;/**
+var _assign$20=index;var EventListener=EventListener_1;var ExecutionEnvironment$14=ExecutionEnvironment_1;var PooledClass$8=PooledClass_1$2;var ReactDOMComponentTree$16=ReactDOMComponentTree_1;var ReactUpdates$8=ReactUpdates_1;var getEventTarget$3=getEventTarget_1;var getUnboundedScrollPosition=getUnboundedScrollPosition_1;/**
  * Find the deepest React component completely containing the root of the
  * passed-in instance (for use when entire React trees are nested within each
  * other). If React trees are not nested, returns null.
@@ -3821,7 +3834,7 @@ var _assign$21=index;var EventListener=EventListener_1;var ExecutionEnvironment$
 // traversal, but caching is difficult to do correctly without using a
 // mutation observer to listen for all DOM changes.
 while(inst._hostParent){inst=inst._hostParent;}var rootNode=ReactDOMComponentTree$16.getNodeFromInstance(inst);var container=rootNode.parentNode;return ReactDOMComponentTree$16.getClosestInstanceFromNode(container);}// Used to store ancestor hierarchy in top level callback
-function TopLevelCallbackBookKeeping(topLevelType,nativeEvent){this.topLevelType=topLevelType;this.nativeEvent=nativeEvent;this.ancestors=[];}_assign$21(TopLevelCallbackBookKeeping.prototype,{destructor:function(){this.topLevelType=null;this.nativeEvent=null;this.ancestors.length=0;}});PooledClass$8.addPoolingTo(TopLevelCallbackBookKeeping,PooledClass$8.twoArgumentPooler);function handleTopLevelImpl(bookKeeping){var nativeEventTarget=getEventTarget$3(bookKeeping.nativeEvent);var targetInst=ReactDOMComponentTree$16.getClosestInstanceFromNode(nativeEventTarget);// Loop through the hierarchy, in case there's any nested components.
+function TopLevelCallbackBookKeeping(topLevelType,nativeEvent){this.topLevelType=topLevelType;this.nativeEvent=nativeEvent;this.ancestors=[];}_assign$20(TopLevelCallbackBookKeeping.prototype,{destructor:function(){this.topLevelType=null;this.nativeEvent=null;this.ancestors.length=0;}});PooledClass$8.addPoolingTo(TopLevelCallbackBookKeeping,PooledClass$8.twoArgumentPooler);function handleTopLevelImpl(bookKeeping){var nativeEventTarget=getEventTarget$3(bookKeeping.nativeEvent);var targetInst=ReactDOMComponentTree$16.getClosestInstanceFromNode(nativeEventTarget);// Loop through the hierarchy, in case there's any nested components.
 // It's important that we build the array of ancestors before calling any
 // event handlers, because event handlers can modify the DOM, leading to
 // inconsistencies with ReactMount's node cache. See #1105.
@@ -3974,7 +3987,7 @@ selection=ReactDOMSelection.getOffsets(input);}return selection||{start:0,end:0}
    * -@offsets   Object of same form that is returned from get*
    */setSelection:function(input,offsets){var start=offsets.start;var end=offsets.end;if(end===undefined){end=start;}if('selectionStart'in input){input.selectionStart=start;input.selectionEnd=Math.min(end,input.value.length);}else if(document.selection&&input.nodeName&&input.nodeName.toLowerCase()==='input'){var range=input.createTextRange();range.collapse(true);range.moveStart('character',start);range.moveEnd('character',end-start);range.select();}else{ReactDOMSelection.setOffsets(input,offsets);}}};var ReactInputSelection_1=ReactInputSelection$1;
 
-var _assign$22=index;var CallbackQueue$2=CallbackQueue_1;var PooledClass$9=PooledClass_1$2;var ReactBrowserEventEmitter$3=ReactBrowserEventEmitter_1;var ReactInputSelection=ReactInputSelection_1;var Transaction$5=Transaction$1;var ReactUpdateQueue$2=ReactUpdateQueue_1;/**
+var _assign$21=index;var CallbackQueue$2=CallbackQueue_1;var PooledClass$9=PooledClass_1$2;var ReactBrowserEventEmitter$3=ReactBrowserEventEmitter_1;var ReactInputSelection=ReactInputSelection_1;var Transaction$5=Transaction$1;var ReactUpdateQueue$2=ReactUpdateQueue_1;/**
  * Ensures that, when possible, the selection range (currently selected text
  * input) is not disturbed by performing the transaction.
  */var SELECTION_RESTORATION={/**
@@ -4025,7 +4038,7 @@ this.renderToStaticMarkup=false;this.reactMountReady=CallbackQueue$2.getPooled(n
 return this.reactMountReady.checkpoint();},rollback:function(checkpoint){this.reactMountReady.rollback(checkpoint);},/**
    * `PooledClass` looks for this, and will invoke this before allowing this
    * instance to be reused.
-   */destructor:function(){CallbackQueue$2.release(this.reactMountReady);this.reactMountReady=null;}};_assign$22(ReactReconcileTransaction$1.prototype,Transaction$5,Mixin$1);PooledClass$9.addPoolingTo(ReactReconcileTransaction$1);var ReactReconcileTransaction_1=ReactReconcileTransaction$1;
+   */destructor:function(){CallbackQueue$2.release(this.reactMountReady);this.reactMountReady=null;}};_assign$21(ReactReconcileTransaction$1.prototype,Transaction$5,Mixin$1);PooledClass$9.addPoolingTo(ReactReconcileTransaction$1);var ReactReconcileTransaction_1=ReactReconcileTransaction$1;
 
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -4457,7 +4470,7 @@ var isContainerReactRoot=container.nodeType===1&&container.hasAttribute(ROOT_ATT
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- */var ReactVersion$4='15.4.1';
+ */var ReactVersion$4='15.4.2';
 
 var ReactNodeTypes$2=ReactNodeTypes_1;function getHostComponentFromComposite$2(inst){var type;while((type=inst._renderedNodeType)===ReactNodeTypes$2.COMPOSITE){inst=inst._renderedComponent;}if(type===ReactNodeTypes$2.HOST){return inst._renderedComponent;}else if(type===ReactNodeTypes$2.EMPTY){return null;}}var getHostComponentFromComposite_1=getHostComponentFromComposite$2;
 

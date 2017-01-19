@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Build: 2017-01-16T15:04:02.392Z
+ * Build: 2017-01-19T20:26:16.402Z
  */
 /** Virtual DOM Node */function VNode(nodeName,attributes,children){/** @type {string|function} */this.nodeName=nodeName;/** @type {object<string>|undefined} */this.attributes=attributes;/** @type {array<VNode>|undefined} */this.children=children;/** Reference to the given key. */this.key=attributes&&attributes.key;}
 

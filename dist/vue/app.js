@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Build: 2017-01-16T15:13:20.416Z
+ * Build: 2017-01-19T20:26:23.640Z
  */
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -2557,26 +2557,6 @@ var commentData = [
   }
 ];
 
-const hasIRC = typeof requestIdleCallback !== 'undefined';
-
-var yieldMixin = {
-  beforeMount () {
-    const render = this.$options.render;
-    this.$options.render = function delayedRender (h) {
-      if (!hasIRC || this.hasRendered) {
-        this.$options.render = render;
-        return render.call(this, h)
-      } else if (!this.pendingRender) {
-        this.pendingRender = true;
-        requestIdleCallback(() => {
-          this.hasRendered = true;
-          this.$forceUpdate();
-        });
-      }
-    };
-  }
-};
-
 var VoteButtons = {render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"post__vote-buttons"},[_c('button',{staticClass:"post__vote-down",on:{"click":function($event){_vm.$emit('downvote');}}},[_vm._v("-")]),_vm._v(" "),_c('span',{staticClass:"post__vote-score"},[_vm._v(_vm._s(_vm._f("format")(_vm.score)))]),_vm._v(" "),_c('button',{staticClass:"post__vote-up",on:{"click":function($event){_vm.$emit('upvote');}}},[_vm._v("+")])])},staticRenderFns: [],
   props: ['score'],
   filters: {
@@ -2594,14 +2574,13 @@ var VoteButtons = {render: function(){var _vm=this;var _h=_vm.$createElement;var
   }
 };
 
-var Comment = {render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"post__comment"},[_c('h2',{staticClass:"post__comment-author"},[_vm._v(_vm._s(_vm.comment.username)+" wrote")]),_c('p',{staticClass:"post__comment-text"},[_vm._v(_vm._s(_vm.comment.text))]),_c('vote-buttons',{attrs:{"score":_vm.comment.score},on:{"upvote":function($event){_vm.comment.score++;},"downvote":function($event){_vm.comment.score--;}}})],1)},staticRenderFns: [],
-  props: ['comment'],
-  mixins: [yieldMixin],
+var Comments = {render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"post__comments"},[_c('h1',[_vm._v("Comments")]),_vm._l((_vm.comments),function(comment){return _c('div',{staticClass:"post__comment"},[_c('h2',{staticClass:"post__comment-author"},[_vm._v(_vm._s(comment.username)+" wrote")]),_c('p',{staticClass:"post__comment-text"},[_vm._v(_vm._s(comment.text))]),_c('vote-buttons',{attrs:{"score":comment.score},on:{"upvote":function($event){comment.score++;},"downvote":function($event){comment.score--;}}})],1)})],2)},staticRenderFns: [],
+  props: ['comments'],
   components: { VoteButtons }
 };
 
-var App = {render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"post"},[_c('h1',{staticClass:"post__title"},[_vm._v("A post about priorities and scheduling")]),_c('a',{staticClass:"post__link",attrs:{"href":"#"}},[_vm._v("http://example.com/post")]),_vm._m(0),_c('section',{staticClass:"post__comments"},[_c('h1',[_vm._v("Comments")]),_vm._l((_vm.commentData),function(comment){return _c('comment',{attrs:{"comment":comment}})})],2)])},staticRenderFns: [function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"post__description"},[_c('p',[_vm._v("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed orci mauris, euismod quis imperdiet eu, lacinia in leo. Mauris in orci sit amet eros finibus molestie. Vivamus laoreet, nibh eget ultrices consequat, leo mauris suscipit libero, eget feugiat enim turpis ac neque. Nam venenatis dolor ac posuere rhoncus.")]),_c('p',[_vm._v("In eget finibus sapien, sit amet tempus augue. Pellentesque eu interdum nulla, sit amet dictum turpis. Sed ut lorem quis purus aliquet egestas. Nulla id risus ex. Morbi et lacinia risus. Integer eget ornare arcu. Donec purus est, dignissim a ante a, lacinia placerat massa. Donec quis lacinia lorem.")])])}],
-  components: { Comment },
+var App = {render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"post"},[_c('h1',{staticClass:"post__title"},[_vm._v("A post about priorities and scheduling")]),_c('a',{staticClass:"post__link",attrs:{"href":"#"}},[_vm._v("http://example.com/post")]),_vm._m(0),_c('comments',{attrs:{"comments":_vm.commentData}})],1)},staticRenderFns: [function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"post__description"},[_c('p',[_vm._v("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed orci mauris, euismod quis imperdiet eu, lacinia in leo. Mauris in orci sit amet eros finibus molestie. Vivamus laoreet, nibh eget ultrices consequat, leo mauris suscipit libero, eget feugiat enim turpis ac neque. Nam venenatis dolor ac posuere rhoncus.")]),_c('p',[_vm._v("In eget finibus sapien, sit amet tempus augue. Pellentesque eu interdum nulla, sit amet dictum turpis. Sed ut lorem quis purus aliquet egestas. Nulla id risus ex. Morbi et lacinia risus. Integer eget ornare arcu. Donec purus est, dignissim a ante a, lacinia placerat massa. Donec quis lacinia lorem.")])])}],
+  components: { Comments },
   data: () => ({ commentData })
 };
 
