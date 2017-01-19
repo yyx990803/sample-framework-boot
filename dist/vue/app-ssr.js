@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Build: 2017-01-19T20:26:24.520Z
+ * Build: 2017-01-19T20:34:19.985Z
  */
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -2589,9 +2589,7 @@ const app = new vue_min$1({
 });
 
 if (typeof window !== 'undefined') {
-  document.addEventListener('DOMContentLoaded', () => {
-    app.$mount('.post');
-  });
+  app.$mount('.post');
 } else {
   module.exports = app;
 }
